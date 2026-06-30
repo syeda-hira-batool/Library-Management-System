@@ -49,5 +49,12 @@ int main() {
 
 	delete u1;
 	delete u2;
+	
+	
+	Book bookA("1984", "George Orwell", "999");
+	Book bookB("1984", "George Orwell", "999");
+	cout << (bookA == bookB ? "Books are equal" : "Books are different") << endl;
+	cout << bookA << endl;
+	
     return 0;
 }
