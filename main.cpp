@@ -49,5 +49,15 @@ int main() {
 
 	delete u1;
 	delete u2;
+	
+	lib.saveToFile("data/books.txt");
+	cout << "Saved to file." << endl;
+	
+	Library lib2;
+	lib2.loadFromFile("data/books.txt");
+	cout << "Loaded into new Library object:" << endl;
+	lib2.displayAllBooks();
+	
+	
     return 0;
 }
