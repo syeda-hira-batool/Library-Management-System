@@ -1,0 +1,13 @@
+#ifndef ADMIN_H
+#define ADMIN_H
+
+#include "User.h"
+
+class Admin : public User {
+	public:
+	    Admin(string username, string password);
+	
+	    void displayMenu() const override;
+};
+
+#endif

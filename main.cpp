@@ -1,6 +1,9 @@
 #include "Book.h"
 #include "MemberRecord.h"
 #include "Library.h"
+#include "Admin.h"
+#include "MemberAccount.h"
+
 #include <iostream>
 using namespace std;
 
@@ -36,6 +39,15 @@ int main() {
     cout << "After returning:" << endl;
     lib.displayAllBooks();
     lib.displayAllMembers();
+    
+    
+	User* u1 = new Admin("admin1", "pass123");   //poly
+	User* u2 = new MemberAccount("hira", "pass456");
+	
+	u1->displayMenu(); 
+	u2->displayMenu(); 
 
+	delete u1;
+	delete u2;
     return 0;
 }
