@@ -1,45 +1,41 @@
 #include "Book.h"
+#include "MemberRecord.h"
+#include "Library.h"
 #include <iostream>
-#include<string>
 using namespace std;
 
+int main() {
+    
+    Book b1("The Hobbit", "J.R.R. Tolkien", "12345");
+    b1.display();
 
-	Book::Book(string t, string a, string i)
-	    : title(t), author(a), isbn(i), available(true) {
-		}
+    b1.setAvailable(false);
+    b1.display();
 
-	string Book::getTitle() const {
-	    return title;
-	}
-	
-	string Book::getAuthor() const {
-	    return author;
-	}
+    
+    MemberRecord m1(1, "Hira");
+    m1.borrowBook("12345");
+    m1.display();
 
-	string Book::getIsbn() const {
-	    return isbn;
-	}
-	
-	bool Book::isAvailable() const {
-	    return available;
-	}
+   
+    Library lib;
+    lib.addBook(Book("The Hobbit", "J.R.R. Tolkien", "12345"));
+    lib.addMember(MemberRecord(1, "Hira"));
 
-	void Book::setTitle(const string& newTitle) {
-	    title = newTitle;
-	}
-	
-	void Book::setAuthor(const string& newAuthor) {
-	    author = newAuthor;
-	}
+    cout << "Initial state:" << endl;
+    lib.displayAllBooks();
+    lib.displayAllMembers();
 
-	void Book::setAvailable(bool status) {
-	    available = status;
-	}
+    
+    lib.issueBook("12345", 1);
+    cout << "After issuing:" << endl;
+    lib.displayAllBooks();
+    lib.displayAllMembers();
 
-	void Book::display() const {
-    	cout << "Title: " << title
-              	<< " | Author: " << author
-              	<< " | ISBN: " << isbn
-              	<< " | Available: " << (available ? "Yes" : "No")
-              	<< std::endl;
-	}
+    lib.returnBookByMember("12345", 1);
+    cout << "After returning:" << endl;
+    lib.displayAllBooks();
+    lib.displayAllMembers();
+
+    return 0;
+}
