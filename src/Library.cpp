@@ -1,6 +1,8 @@
 #include "Library.h"
 #include <iostream>
 #include <algorithm>
+#include<fstream>
+#include<sstream>
 using namespace std;
 
 Library::Library() {}
@@ -78,4 +80,43 @@ Library::Library() {}
 	    book->setAvailable(true);
 	    member->returnBook(isbn);
 	    return true;
+	}
+	
+	void Library::saveToFile(const string& filename) const {
+    ofstream outFile(filename);
+    if (!outFile) {
+        cout << "Error: could not open file for saving." << endl;
+        return;
+    }
+    for (const auto& b : books) {
+        outFile << b.getTitle() << "|" << b.getAuthor() << "|"
+                << b.getIsbn() << "|" << b.isAvailable() << endl;
+    }
+    outFile.close();
+}
+
+	void Library::loadFromFile(const string& filename) {
+	    ifstream inFile(filename);
+	    if (!inFile) {
+	        cout << "Error: could not open file for loading." << endl;
+	        return;
+	    }
+	
+	    books.clear(); 
+	
+	    string line;
+	    while (getline(inFile, line)) {
+	        stringstream ss(line);
+	        string title, author, isbn, availableStr;
+	
+	        getline(ss, title, '|');
+	        getline(ss, author, '|');
+	        getline(ss, isbn, '|');
+	        getline(ss, availableStr, '|');
+	
+	        Book b(title, author, isbn);
+	        b.setAvailable(availableStr == "1");
+	        books.push_back(b);
+	    }
+	    inFile.close();
 	}

@@ -26,6 +26,8 @@ class Library {
 	    
 	    bool issueBook(const string& isbn, int memberId);
 		bool returnBookByMember(const string& isbn, int memberId);
+		void saveToFile(const string& filename) const;
+		void loadFromFile(const string& filename);
 };
 
 #endif
