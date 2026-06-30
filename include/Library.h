@@ -23,6 +23,9 @@ class Library {
 	
 	    void displayAllBooks() const;
 	    void displayAllMembers() const;
+	    
+	    bool issueBook(const string& isbn, int memberId);
+		bool returnBookByMember(const string& isbn, int memberId);
 };
 
 #endif

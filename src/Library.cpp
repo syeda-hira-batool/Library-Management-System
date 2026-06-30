@@ -50,3 +50,32 @@ Library::Library() {}
 	        m.display();
 	    }
 	}
+	
+	bool Library::issueBook(const string& isbn, int memberId) {
+    Book* book = searchBook(isbn);
+    MemberRecord* member = searchMember(memberId);
+
+    if (book == nullptr || member == nullptr) {
+        return false;
+    }
+    if (!book->isAvailable()) {
+        return false;
+    }
+
+    book->setAvailable(false);
+    member->borrowBook(isbn);
+    return true;
+}
+
+	bool Library::returnBookByMember(const string& isbn, int memberId) {
+	    Book* book = searchBook(isbn);
+	    MemberRecord* member = searchMember(memberId);
+	
+	    if (book == nullptr || member == nullptr) {
+	        return false;
+	    }
+	
+	    book->setAvailable(true);
+	    member->returnBook(isbn);
+	    return true;
+	}
